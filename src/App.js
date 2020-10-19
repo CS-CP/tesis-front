@@ -3,10 +3,25 @@ import './App.css';
 import 'antd/dist/antd.css';
 import { Layout, Menu } from 'antd';
 import DragFile from './components/DragFile';
+import PieComp from './components/PieComp';
+import BarComp from './components/BarComp';
 
 const { Header, Footer, Content } = Layout;
 
+
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      analizar: false,
+    };
+    this.goAnalizar = this.goAnalizar.bind(this);
+
+  }
+  goAnalizar() {
+      this.setState({ analizar:true});
+  }
+
   render() {
     console.log("HOLA APP");
     return (
@@ -19,17 +34,33 @@ class App extends Component {
               <Menu.Item key="2">Contáctanos</Menu.Item>
             </Menu>
           </Header>
-          <Content style={{ padding: '0 50px'}}>
+          <Content style={{ padding: '0 50px' }}>
             <div class="cover d-flex justify-content-center align-items-center flex-column image">
-              <h1 style={{color: "floralwhite"}}> 
+              <h1 style={{ color: "floralwhite" }}>
                 YOPS
               </h1>
             </div>
-            <DragFile></DragFile>
+            <DragFile goAnalizar={this.goAnalizar}></DragFile>
             <div className="site-layout-content"></div>
           </Content>
-
-          <Footer style={{ textAlign: 'center' }}>Trabajo de investigación PUCP 2020</Footer>
+          {this.state.analizar && (
+            <div>
+            <div>
+              <BarComp insectType="Mosca Blanca"></BarComp>
+              <br />
+              <BarComp insectType="Mosca Minadora"></BarComp>
+              <br />
+              <BarComp insectType="Pulgón verde del melocotonero"></BarComp>
+            </div>
+            <br />
+            <div>
+              <PieComp></PieComp>
+            </div>
+          </div>
+          )}
+          
+          <br />
+          {this.state.analizar}<Footer style={{ textAlign: 'center' }}>Trabajo de investigación - PUCP 2020</Footer>
         </Layout>
       </div>
     )

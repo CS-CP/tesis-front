@@ -28,9 +28,12 @@ export class DragFile extends Component {
         //this.myBeforeUpload = this.myBeforeUpload.bind(this);
         this.onFileChange = this.onFileChange.bind(this);
 
-
-
     }
+
+    analizar = e => {
+        e.preventDefault();
+        this.props.goAnalizar();
+    };
 
     onFileChange(fileList) {
         if (fileList.file.status !== 'uploading') {
@@ -110,7 +113,7 @@ export class DragFile extends Component {
                 </Dragger>
                 <div class="container-button">
                     <div class="center">
-                        <Button className="normal-button">
+                        <Button className="normal-button" onClick={this.analizar} >
                             Analizar
                     </Button>
                     </div>
