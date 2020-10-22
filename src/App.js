@@ -5,6 +5,10 @@ import { Layout, Menu } from 'antd';
 import DragFile from './components/DragFile';
 import PieComp from './components/PieComp';
 import BarComp from './components/BarComp';
+/*import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';*/
+import { Row, Col } from 'antd';
 
 const { Header, Footer, Content } = Layout;
 
@@ -19,7 +23,7 @@ class App extends Component {
 
   }
   goAnalizar() {
-      this.setState({ analizar:true});
+    this.setState({ analizar: true });
   }
 
   render() {
@@ -41,24 +45,25 @@ class App extends Component {
               </h1>
             </div>
             <DragFile goAnalizar={this.goAnalizar}></DragFile>
-            <div className="site-layout-content"></div>
+            <div className="site-layout-content title-text" >{this.state.analizar ? "Resultados del análisis de imágenes:" : ""}</div>
           </Content>
+
           {this.state.analizar && (
-            <div>
-            <div>
-              <BarComp insectType="Mosca Blanca"></BarComp>
-              <br />
-              <BarComp insectType="Mosca Minadora"></BarComp>
-              <br />
-              <BarComp insectType="Pulgón verde del melocotonero"></BarComp>
+            <div style={{ margin: "48px" }}>
+              <Content>
+                <Row>
+                  <Col span={6} push={18}>
+                  <PieComp></PieComp>
+                  </Col>
+                  <Col span={18} pull={6}>
+                    <BarComp insectType={["Mosca Blanca", "Mosca Minadora", "Pulgón verde del melocotonero"]}></BarComp>
+                  </Col>
+                </Row>
+
+              </Content>
             </div>
-            <br />
-            <div>
-              <PieComp></PieComp>
-            </div>
-          </div>
           )}
-          
+
           <br />
           {this.state.analizar}<Footer style={{ textAlign: 'center' }}>Trabajo de investigación - PUCP 2020</Footer>
         </Layout>

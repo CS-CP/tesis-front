@@ -99,8 +99,7 @@ export class DragFile extends Component {
             <div>
                 <br />
                 <br />
-                <b>Suba imágenes de trampas pegantes amarillas a analizar:  </b>
-                <br />
+                <h3>Suba imágenes de trampas pegantes amarillas a analizar:  </h3>
                 <br />
                 <Dragger {...props}
                 //fileList={this.state.fileList} onChange={this.onFileChange}
@@ -118,6 +117,7 @@ export class DragFile extends Component {
                     </Button>
                     </div>
                 </div>
+                <br/>
 
             </div>
         );

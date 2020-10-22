@@ -38,7 +38,7 @@ export class PieComp extends Component {
 
         return (
             <div>
-                <h2>Resumen del total de imágenes:</h2>
+                <h2 className="title-text">Resumen:</h2>
                 <Pie data={data} />
             </div>
         );
