@@ -2,13 +2,11 @@ import React, { Component } from 'react';
 import './App.css';
 import 'antd/dist/antd.css';
 import { Layout, Menu } from 'antd';
-import DragFile from './components/DragFile';
 import PieComp from './components/PieComp';
 import BarComp from './components/BarComp';
-/*import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';*/
 import { Row, Col } from 'antd';
+import UploadImages from './components/UploadImages';
+
 
 const { Header, Footer, Content } = Layout;
 
@@ -18,16 +16,21 @@ class App extends Component {
     super(props);
     this.state = {
       analizar: false,
+      images: [],
     };
     this.goAnalizar = this.goAnalizar.bind(this);
+    this.sendImages = this.sendImages.bind(this);
 
   }
   goAnalizar() {
     this.setState({ analizar: true });
+    console.log("GO ENVIAR: ", this.state.images);
+  }
+  sendImages(imagesToSend) {
+    this.setState({ images: imagesToSend})
   }
 
   render() {
-    console.log("HOLA APP");
     return (
       <div>
         <Layout className="layout">
@@ -39,13 +42,19 @@ class App extends Component {
             </Menu>
           </Header>
           <Content style={{ padding: '0 50px' }}>
-            <div class="cover d-flex justify-content-center align-items-center flex-column image">
-              <h1 style={{ color: "floralwhite" }}>
+            <div className="cover d-flex justify-content-center align-items-center flex-column image">
+              <h1 style={{ color: "floralwhite", fontSize:"64px" }}>
                 YOPS
               </h1>
             </div>
-            <DragFile goAnalizar={this.goAnalizar}></DragFile>
-            <div className="site-layout-content title-text" >{this.state.analizar ? "Resultados del análisis de imágenes:" : ""}</div>
+            <br />
+            <br />
+            <h4>Suba imágenes de trampas pegantes amarillas a analizar:  </h4>
+            <br />
+            <UploadImages imagesToSend={this.sendImages} goAnalizar={this.goAnalizar}></UploadImages>
+            <br />
+            <br />
+            <h2 className="title-text" >{this.state.analizar ? "Resultados del análisis de imágenes:" : ""}</h2>
           </Content>
 
           {this.state.analizar && (
@@ -53,7 +62,7 @@ class App extends Component {
               <Content>
                 <Row>
                   <Col span={6} push={18}>
-                  <PieComp></PieComp>
+                    <PieComp></PieComp>
                   </Col>
                   <Col span={18} pull={6}>
                     <BarComp insectType={["Mosca Blanca", "Mosca Minadora", "Pulgón verde del melocotonero"]}></BarComp>
