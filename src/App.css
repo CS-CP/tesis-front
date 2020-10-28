@@ -13,6 +13,8 @@
   }
 }
 
+@import '~antd/dist/antd.css';
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -35,4 +37,110 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.site-layout-content {
+  background: #f0f2f5;
+  padding: 24px;
+  min-height: 140px;
+  
+}
+#components-layout-demo-top .logo {
+  width: 120px;
+  height: 31px;
+  background: rgba(51, 255, 0, 0.2);
+  margin: 16px 24px 16px 0;
+  float: center;
+}
+.image {
+  color: white;
+  background: white;
+  min-height: 180px;
+  background-image: url('./field.jpg');
+  background-size: cover;
+  background-position: center;
+}
+.container-button {
+  height: 80px;
+  position: relative;
+  /*border: 0px solid rgba(255, 0, 0, 0.534);*/
+}
+
+.center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.normal-button {
+  /*background: blue;*/
+  color:rgb(199, 0, 0);
+  position: relative;
+  font-weight: bold;
+  border: 2px solid rgb(199, 0, 0);
+  border-radius: 50%;
+  font-size: larger ;
+  margin-top: 30px;
+  height: 80px;
+  box-shadow: 2px 2px 3px 0 rgba(0, 0, 0, 0.5);
+  /*background-color: red;*/
+}
+
+.normal-button:hover, .normal-button:focus {
+  background-color:rgb(199, 0, 0);
+  border: 0.2px solid black;
+  color: white;
+  border-radius: 50%;
+  font-size: larger ;
+}
+
+/* CAREFUL 
+.ant-upload-list {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  margin-right: 25px;
+  padding: 10px;
+  color: rgba(0, 0, 0, 0.65);
+  font-size: 14px;
+  font-variant: tabular-nums;
+  line-height: 1.5;
+  list-style: none;
+  -webkit-font-feature-settings: 'tnum';
+  font-feature-settings: 'tnum', "tnum";
+  zoom: 1;
+}
+.ant-upload-list-item-error, .ant-upload-list-item-error .anticon-paper-clip, .ant-upload-list-item-error .ant-upload-list-item-name {
+  color: green;
+}
+
+.ant-upload.ant-upload-drag {
+  position: relative;
+  width: 98%;
+  height: 100%;
+  text-align: center;
+  border-radius: 4px;
+  cursor: pointer;
+  -webkit-transition: border-color 0.3s;
+  transition: border-color 0.3s;
+  margin-right:25px;
+}
+.ant-upload.ant-upload-drag p.ant-upload-drag-icon .anticon {
+  font-size: 48px;
+}*/
+.upload-list-inline .ant-upload-list-item {
+  float: left;
+  width: 200px;
+  margin-right: 8px;
+}
+
+.upload-list-inline [class*='-upload-list-rtl'] .ant-upload-list-item {
+  float: right;
+}
+
+.title-text {
+  font-size: 32px;
+  text-align: center;
 }
