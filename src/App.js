@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import './App.css';
 import 'antd/dist/antd.css';
-import { Layout, Menu } from 'antd';
+import { Layout, Menu, Spin } from 'antd';
 import PieComp from './components/PieComp';
 import BarComp from './components/BarComp';
 import { Row, Col } from 'antd';
 import UploadImages from './components/UploadImages';
+import API from './services/API';
+import notify from './Public/notification/notify';
 
 
 const { Header, Footer, Content } = Layout;
@@ -17,20 +19,45 @@ class App extends Component {
     this.state = {
       analizar: false,
       images: [],
+      spin: false,
+      respuesta: {
+        detalleImgs: [],
+      },
     };
     this.goAnalizar = this.goAnalizar.bind(this);
     this.sendImages = this.sendImages.bind(this);
 
   }
   goAnalizar() {
-    this.setState({ analizar: true });
-    console.log("GO ENVIAR: ", this.state.images);
+    this.setState({ spin : true }); //analizar naranjas
+    let json = {
+      images: this.state.images
+    }
+    console.log("Data al Back: ", this.state.images);
+    API.post("api/detectImages", json).then(response => {
+      console.log("El back respondió: ", response.data);
+      this.setState({ analizar: true, spin: false, respuesta: response.data });
+      notify.success({
+        message: 'Se procesaron todas las imágenes.'
+      });
+    }).catch((error) => {
+      this.setState({ spin: false });
+      notify.error({
+        message: 'Ocurrió un error inseperado.'
+      });
+    })
   }
   sendImages(imagesToSend) {
-    this.setState({ images: imagesToSend})
+    this.setState({ images: imagesToSend })
   }
 
   render() {
+    if (this.state.respuesta) {
+      var leImages = this.state.respuesta.detalleImgs.map(image => {
+        return <img key={image} src={image.imgB64} className="img-responsive yops-img" />
+     });
+    }
+    
     return (
       <div>
         <Layout className="layout">
@@ -43,8 +70,8 @@ class App extends Component {
           </Header>
           <Content style={{ padding: '0 50px' }}>
             <div className="cover d-flex justify-content-center align-items-center flex-column image">
-              <h1 style={{ color: "floralwhite", fontSize:"64px" }}>
-                YOPS
+              <h1 style={{ color: "floralwhite", fontSize: "64px" }}>
+                🌱 YOPS 🌱
               </h1>
             </div>
             <br />
@@ -54,7 +81,15 @@ class App extends Component {
             <UploadImages imagesToSend={this.sendImages} goAnalizar={this.goAnalizar}></UploadImages>
             <br />
             <br />
+            {this.state.spin && (
+                        <div className="spinner"><Spin tip="Detectando insectos..." size="large" /></div>
+                    )}
             <h2 className="title-text" >{this.state.analizar ? "Resultados del análisis de imágenes:" : ""}</h2>
+            {this.state.analizar && (
+            <div className="centered-img">
+              {leImages}
+            </div>
+            )}
           </Content>
 
           {this.state.analizar && (
@@ -62,10 +97,10 @@ class App extends Component {
               <Content>
                 <Row>
                   <Col span={6} push={18}>
-                    <PieComp></PieComp>
+                    <PieComp dataReporte={this.state.respuesta}></PieComp>
                   </Col>
                   <Col span={18} pull={6}>
-                    <BarComp insectType={["Mosca Blanca", "Mosca Minadora", "Pulgón verde del melocotonero"]}></BarComp>
+                    <BarComp insectType={["Mosca Blanca", "Mosca Minadora", "Pulgón verde del melocotonero"]} dataReporte={this.state.respuesta}></BarComp>
                   </Col>
                 </Row>
 

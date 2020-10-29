@@ -144,3 +144,28 @@
   font-size: 32px;
   text-align: center;
 }
+
+.spinner {
+  text-align: center;
+  background: rgba(0, 0, 0, 0.0);
+  border-radius: 4px;
+  margin: 20px 0;
+}
+.ant-spin-dot-item {
+  background-color: red;
+}
+.ant-spin {
+  color: red;
+  font-weight:bold;
+}
+
+.centered-img {
+  text-align: center;
+  margin: 20px;
+}
+
+.yops-img {
+  margin: 20px;
+  max-width: 400px;
+  max-height: 400px;
+}
