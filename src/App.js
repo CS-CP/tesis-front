@@ -69,7 +69,7 @@ class App extends Component {
           <Content style={{ padding: '0 50px' }}>
             <div className="cover d-flex justify-content-center align-items-center flex-column image">
               <h1 style={{ color: "greenyellow", fontSize: "64px" }}>
-                🌱 Verdex 🌱
+                🌱 Verde hoja 🌱
               </h1>
             </div>
             <br />
