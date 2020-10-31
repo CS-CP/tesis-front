@@ -8,6 +8,10 @@ import { Row, Col } from 'antd';
 import UploadImages from './components/UploadImages';
 import API from './services/API';
 import notify from './Public/notification/notify';
+import CarouselComp from "./components/CarouselComp";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+
+
 
 
 const { Header, Footer, Content } = Layout;
@@ -29,7 +33,7 @@ class App extends Component {
 
   }
   goAnalizar() {
-    this.setState({ spin : true }); //analizar naranjas
+    this.setState({ spin: true });
     let json = {
       images: this.state.images
     }
@@ -52,12 +56,6 @@ class App extends Component {
   }
 
   render() {
-    if (this.state.respuesta) {
-      var leImages = this.state.respuesta.detalleImgs.map(image => {
-        return <img key={image} src={image.imgB64} className="img-responsive yops-img" />
-     });
-    }
-    
     return (
       <div>
         <Layout className="layout">
@@ -70,8 +68,8 @@ class App extends Component {
           </Header>
           <Content style={{ padding: '0 50px' }}>
             <div className="cover d-flex justify-content-center align-items-center flex-column image">
-              <h1 style={{ color: "floralwhite", fontSize: "64px" }}>
-                🌱 YOPS 🌱
+              <h1 style={{ color: "greenyellow", fontSize: "64px" }}>
+                🌱 Verdex 🌱
               </h1>
             </div>
             <br />
@@ -81,25 +79,31 @@ class App extends Component {
             <UploadImages imagesToSend={this.sendImages} goAnalizar={this.goAnalizar}></UploadImages>
             <br />
             <br />
-            {this.state.spin && (
-                        <div className="spinner"><Spin tip="Detectando insectos..." size="large" /></div>
-                    )}
-            <h2 className="title-text" >{this.state.analizar ? "Resultados del análisis de imágenes:" : ""}</h2>
-            {this.state.analizar && (
-            <div className="centered-img">
-              {leImages}
-            </div>
-            )}
           </Content>
+          {this.state.spin && (
+            <div className="spinner"><Spin tip="Detectando insectos..." size="large" /></div>
+          )}
+          <h2 className="title-text" >{this.state.analizar ? "Resultados del análisis de imágenes:" : ""}</h2>
+          {this.state.analizar && (
+            <div>
+              <Row>
+                <Col span={6}></Col>
+                <Col span={12}><div className="container-centered"><CarouselComp dataReporte={this.state.respuesta}></CarouselComp></div></Col>
+                <Col span={6}></Col>
+              </Row>
+            </div>
+          )}
+
+
 
           {this.state.analizar && (
             <div style={{ margin: "48px" }}>
               <Content>
                 <Row>
-                  <Col span={6} push={18}>
+                  <Col span={8} push={16}>
                     <PieComp dataReporte={this.state.respuesta}></PieComp>
                   </Col>
-                  <Col span={18} pull={6}>
+                  <Col span={16} pull={8}>
                     <BarComp insectType={["Mosca Blanca", "Mosca Minadora", "Pulgón verde del melocotonero"]} dataReporte={this.state.respuesta}></BarComp>
                   </Col>
                 </Row>

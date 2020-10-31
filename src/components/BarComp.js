@@ -25,9 +25,9 @@ export class BarComp extends Component {
             lista_mm.push(detalle.MoscaMinadora);
             lista_pv.push(detalle.PulgonVerde);
             cant_img += 1;
-            nombres_img.push("Imagen N°"+cant_img);
+            nombres_img.push("Imagen N°" + cant_img);
         });
-        
+
         const data = {
             labels: nombres_img,//['Imagen 1', 'Imagen 2', 'Imagen 3', 'Imagen 4', 'Imagen 5', 'Imagen 6'],
             datasets: [
@@ -38,7 +38,8 @@ export class BarComp extends Component {
                     borderWidth: 1,
                     hoverBackgroundColor: 'rgba(255,99,132,0.4)',
                     hoverBorderColor: 'rgba(255,99,132,1)',
-                    data: lista_mb//[65, 59, 80, 81, 56, 55]
+                    data: lista_mb,//[65, 59, 80, 81, 56, 55]
+                    minBarLength: 2,
                 },
                 {
                     label: this.props.insectType[1],
@@ -47,6 +48,7 @@ export class BarComp extends Component {
                     borderWidth: 1,
                     hoverBackgroundColor: 'rgba(255,99,132,0.4)',
                     hoverBorderColor: 'rgba(255,99,132,1)',
+                    minBarLength: 2,
                     data: lista_mm//[65, 59, 80, 81, 56, 55]
                 },
                 {
@@ -56,6 +58,7 @@ export class BarComp extends Component {
                     borderWidth: 1,
                     hoverBackgroundColor: 'rgba(255,99,132,0.4)',
                     hoverBorderColor: 'rgba(255,99,132,1)',
+                    minBarLength: 2,
                     data: lista_pv//[65, 59, 80, 81, 56, 55]
                 },
             ]
@@ -68,7 +71,14 @@ export class BarComp extends Component {
                     width={100}
                     height={50}
                     options={{
-                        maintainAspectRatio: true
+                        maintainAspectRatio: true,
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                        }
                     }}
                 />
             </div>
