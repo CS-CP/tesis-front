@@ -17,6 +17,7 @@
     "react-chartjs-2": "^2.10.0",
     "react-dom": "^16.14.0",
     "react-images-upload": "^1.2.8",
+    "react-responsive-carousel": "^3.2.10",
     "react-scripts": "3.4.3"
   },
   "scripts": {
