@@ -27,13 +27,13 @@ export class PieComp extends Component {
                 data: [this.props.dataReporte.cantTotalMB, this.props.dataReporte.cantTotalMM, this.props.dataReporte.cantTotalPV],
                 backgroundColor: [
                     '#cad1c9',
-                    '#f0ec9c',
+                    '#FFA835',
                     '#74cf1f'
                 ],
                 hoverBackgroundColor: [
-                    '#1890ff',
-                    '#1890ff',
-                    '#1890ff'
+                    'rgba(255,99,132,1)',
+                    'rgba(255,99,132,1)',
+                    'rgba(255,99,132,1)'
                 ]
             }]
         };
@@ -41,7 +41,10 @@ export class PieComp extends Component {
         return (
             <div>
                 <h2 className="title-text">Resumen:</h2>
-                <Pie data={data} />
+                <Pie data={data} options={{
+                    responsive: true
+
+                }} />
             </div>
         );
     }

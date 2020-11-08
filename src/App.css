@@ -180,3 +180,8 @@
   position: relative;
   /*border: 0px solid rgba(255, 0, 0, 0.534);*/
 }
+.text-img-download {
+  text-align: center;
+  color: white;
+  background-color: black;
+}

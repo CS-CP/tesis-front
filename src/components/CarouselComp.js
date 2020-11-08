@@ -49,7 +49,8 @@ export class CarouselComp extends Component {
         {imgs.map((img, index) => (
           <div className="container-centered">
             <img alt="" src={img} />
-            <p className="legend">{nombres_img[index]}</p>
+            <p className="legend"><a href={img} download={nombres_img[index]+".png"} className="text-img-download">{nombres_img[index]}</a></p>
+            
           </div>
         ))}
       </Carousel></div>
