@@ -33,14 +33,14 @@ class App extends Component {
 
   }
   goAnalizar() {
-    console.log("Data al Back: ", this.state.images);
+    //console.log("Data al Back: ", this.state.images);
     if (this.state.images.length !== 0) {
       this.setState({ spin: true });
       let json = {
         images: this.state.images
       }
       API.post("api/detectImages", json).then(response => {
-        console.log("El back respondió: ", response.data);
+        //console.log("El back respondió: ", response.data);
         this.setState({ analizar: true, spin: false, respuesta: response.data });
         notify.success({
           message: 'Se procesaron todas las imágenes.'

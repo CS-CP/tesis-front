@@ -25,7 +25,6 @@ export class UploadImages extends Component {
     };
 
     render() {
-        console.log("PROPS: ", this.props);
         return (
             <div>
                 <ImageUploader
