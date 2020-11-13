@@ -11,4 +11,8 @@ export default class Notify {
         notification.success({...params, duration: Notify.DURATION});
     }
 
+    static info = (params) => {
+        notification.info({...params, duration: Notify.DURATION});
+    }
+
 }

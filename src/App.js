@@ -33,23 +33,31 @@ class App extends Component {
 
   }
   goAnalizar() {
-    this.setState({ spin: true });
-    let json = {
-      images: this.state.images
-    }
     console.log("Data al Back: ", this.state.images);
-    API.post("api/detectImages", json).then(response => {
-      console.log("El back respondió: ", response.data);
-      this.setState({ analizar: true, spin: false, respuesta: response.data });
-      notify.success({
-        message: 'Se procesaron todas las imágenes.'
-      });
-    }).catch((error) => {
-      this.setState({ spin: false });
-      notify.error({
-        message: 'Ocurrió un error inseperado.'
-      });
-    })
+    if (this.state.images.length !== 0) {
+      this.setState({ spin: true });
+      let json = {
+        images: this.state.images
+      }
+      API.post("api/detectImages", json).then(response => {
+        console.log("El back respondió: ", response.data);
+        this.setState({ analizar: true, spin: false, respuesta: response.data });
+        notify.success({
+          message: 'Se procesaron todas las imágenes.'
+        });
+      }).catch((error) => {
+        this.setState({ spin: false });
+        notify.error({
+          message: 'Ocurrió un error inseperado.'
+        });
+      })
+    }
+    else {
+      notify.info({
+        message: 'No ha subido imágenes para analizar.'
+      })
+    }
+
   }
   sendImages(imagesToSend) {
     this.setState({ images: imagesToSend })
@@ -76,7 +84,7 @@ class App extends Component {
             <br />
             <h4>Suba imágenes de trampas pegantes amarillas a analizar:  </h4>
             <br />
-            <UploadImages imagesToSend={this.sendImages} goAnalizar={this.goAnalizar}></UploadImages>
+            <UploadImages imagesToSend={this.sendImages} goAnalizar={this.goAnalizar} loading={this.state.spin}></UploadImages>
             <br />
             <br />
           </Content>

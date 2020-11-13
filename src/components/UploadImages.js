@@ -25,6 +25,7 @@ export class UploadImages extends Component {
     };
 
     render() {
+        console.log("PROPS: ", this.props);
         return (
             <div>
                 <ImageUploader
@@ -40,7 +41,7 @@ export class UploadImages extends Component {
                 />
                 <div className="container-button">
                     <div className="center">
-                        <Button className="normal-button" onClick={this.analizar} >
+                        <Button className="normal-button" onClick={this.analizar} disabled={this.props.loading}>
                             Analizar
                         </Button>
                     </div>
